@@ -8,13 +8,27 @@ describe(`Function 'validateEmail':`, () => {
   });
 
   it(`should return boolean`, () => {
-
+    expect(typeof validateEmail('test838@gmail.com')).toBe('boolean');
   });
 
   it(`should return 'true' for the valid email`, () => {
-    expect(validateEmail('test838@gmail.com.'))
+    expect(validateEmail('test838@gmail.com'))
       .toBeTruthy();
   });
 
-  // write more tests here
+  it(`should return 'false' for email with not allowed char`, () => {
+    expect(validateEmail('test!838@gmail.com')).toBe(false);
+  });
+
+  it(`should return 'false' for email with double dots`, () => {
+    expect(validateEmail('test..838@gmail.com')).toBe(false);
+  });
+
+  it(`should return 'false' if email starts with '.'`, () => {
+    expect(validateEmail('.test838@gmail.com')).toBe(false);
+  });
+
+  it(`should return 'false' for emails without '@'`, () => {
+    expect(validateEmail('test838gmail.com')).toBe(false);
+  });
 });
